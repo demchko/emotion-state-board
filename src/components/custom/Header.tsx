@@ -11,7 +11,6 @@ export const Header = () => {
             <h1 className={`text-4xl font-semibold mb-2 text-foreground`}>
                 BOARD OF EMOTIONS
             </h1>
-            <p className="text-gray-400 text-lg font-mono" >День — час відслідковувати свої емоції</p>
         </motion.div>
     )
 }

@@ -4,17 +4,28 @@ import { Button } from "../ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { Label } from "../ui/label"
 import { emotionsData } from "@/lib/emotions"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Textarea } from "../ui/textarea";
+import { emotionStore } from "@/stores/emotionSore";
+import { EmotionType } from "@/types/emotions";
 
 export const AddEmotionModal = () => {
-    const [selectedEmotion, setSelectedEmotion] = useState<string | null>("");
+    const [selectedEmotion, setSelectedEmotion] = useState<EmotionType | null>(null);
     const [comment, setComment] = useState<string>("");
+    const [openModal, setOpenModal] = useState<boolean>(false);
+
+    const handleSubmit = () => {
+        if (!selectedEmotion) return;
+        emotionStore.addEmotion(selectedEmotion, comment);
+        setSelectedEmotion(null);
+        setComment("");
+        setOpenModal(false);
+    }
 
     return (
-        <Dialog>
+        <Dialog open={openModal} onOpenChange={setOpenModal} >
             <DialogTrigger asChild>
                 <Button >
                     <Plus />
@@ -34,7 +45,7 @@ export const AddEmotionModal = () => {
                         {
                             Object.entries(emotionsData).map(([key, emotion]) => (
                                 <motion.button
-                                    onClick={() => setSelectedEmotion(key)}
+                                    onClick={() => setSelectedEmotion(key as EmotionType)}
                                     key={key}
                                     className={cn(
                                         "bg-white relative h-16 cursor-pointer flex items-center justify-center gap-2 rounded-lg border",
@@ -42,7 +53,7 @@ export const AddEmotionModal = () => {
                                             ? emotion.activeStyles
                                             : `border-1 hover:bg-gray-100 ${emotion.borderColor}`
                                     )}
-                                    whileHover={{ scale: 1.05 }}
+                                    // whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.95 }}
                                     type="button"
                                 >
@@ -83,7 +94,7 @@ export const AddEmotionModal = () => {
                             Скасувати
                         </Button>
                     </DialogClose>
-                    <Button className="w-full sm:w-1/2" >Зберегти</Button>
+                    <Button className="w-full sm:w-1/2" onClick={handleSubmit} >Зберегти</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -1,9 +1,11 @@
 import { Header } from "@/components/custom/Header";
+import { SubHeaderButtons } from "@/components/custom/SubHeaderButtons";
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-background dark p-8" >
+    <div className="min-h-screen w-full p-8" >
       <Header />
+      <SubHeaderButtons />
     </div>
   )
 }

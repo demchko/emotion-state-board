@@ -6,6 +6,8 @@ import { AddEmotionModal } from "./AddEmotionModal"
 import { ModeToggle } from "./ThemeToggle"
 import { motion } from "framer-motion";
 import { StatsModal } from "./StatModal";
+import { emotionStore } from "@/stores/emotionSore";
+import { toJS } from "mobx";
 
 export const SubHeaderButtons = () => {
     return (

@@ -1,5 +1,5 @@
 "use client";
-import { ChartColumn, Plus, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import { Button } from "../ui/button"
 import Image from "next/image"
 import { AddEmotionModal } from "./AddEmotionModal"
@@ -7,9 +7,9 @@ import { ModeToggle } from "./ThemeToggle"
 import { motion } from "framer-motion";
 import { StatsModal } from "./StatModal";
 import { emotionStore } from "@/stores/emotionSore";
-import { toJS } from "mobx";
+import { observer } from "mobx-react-lite";
 
-export const SubHeaderButtons = () => {
+export const SubHeaderButtons = observer(() => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ export const SubHeaderButtons = () => {
             <div className="flex flex-col sm:flex-row gap-4" >
                 <AddEmotionModal />
                 <StatsModal />
-                <Button variant="outline" disabled>
+                <Button variant="outline" disabled={emotionStore.emotions.length === 0} onClick={() => emotionStore.clearAllEmotions()}>
                     <Trash2 />
                     Очистити все
                 </Button>
@@ -29,4 +29,4 @@ export const SubHeaderButtons = () => {
             </div>
         </motion.div >
     )
-}
+})

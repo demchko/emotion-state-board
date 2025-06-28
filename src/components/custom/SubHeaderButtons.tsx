@@ -21,7 +21,7 @@ export const SubHeaderButtons = observer(() => {
             <div className="flex flex-col sm:flex-row gap-4" >
                 <AddEmotionModal />
                 <StatsModal />
-                <Button variant="outline" disabled={emotionStore.emotions.length === 0} onClick={() => emotionStore.clearAllEmotions()}>
+                <Button variant="outline" disabled={emotionStore.emotions.length === 0} suppressHydrationWarning onClick={() => emotionStore.clearAllEmotions()}>
                     <Trash2 />
                     Очистити все
                 </Button>

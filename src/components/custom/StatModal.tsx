@@ -1,12 +1,14 @@
 import { ChartColumn } from "lucide-react"
 import { Button } from "../ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
+import { observer } from "mobx-react-lite"
+import { emotionStore } from "@/stores/emotionSore";
 
-export const StatsModal = () => {
+export const StatsModal = observer(() => {
     return (
         <Dialog>
             <DialogTrigger asChild >
-                <Button variant="outline">
+                <Button variant="outline" disabled={emotionStore.emotions.length === 0}>
                     <ChartColumn />
                     Статистика
                 </Button >
@@ -23,4 +25,4 @@ export const StatsModal = () => {
             </DialogContent>
         </Dialog>
     )
-}
+});

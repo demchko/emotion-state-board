@@ -29,7 +29,7 @@ export const EmotionsList = observer(() => {
             className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
             {emotionStore.emotions.map(item => (
-                <EmotionCard key={item.id} type={item.type} comment={item.comment} />
+                <EmotionCard key={item.id} type={item.type} comment={item.comment} id={item.id} />
             ))}
         </motion.div>
     );

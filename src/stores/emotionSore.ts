@@ -26,30 +26,35 @@ class EmotionStore {
         this.saveToStorage();
     };
 
-    // Action: очищення всіх емоцій
+    reorderEmotions = (startIndex: number, endIndex: number) => {
+        const result = Array.from(this.emotions);
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+
+        this.emotions = result;
+        this.saveToStorage();
+    };
+
     clearAllEmotions = () => {
         this.emotions = [];
         this.saveToStorage();
     };
 
-    // Збереження в localStorage
     private saveToStorage = () => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('emotions', JSON.stringify(this.emotions));
         }
     };
 
-    // Завантаження з localStorage
     private loadFromStorage = () => {
         if (typeof window !== 'undefined') {
             const stored = localStorage.getItem('emotions');
             if (stored) {
                 try {
                     const parsedEmotions = JSON.parse(stored);
-                    // Перетворюємо timestamp з string в Date
                     this.emotions = parsedEmotions.map((emotion: any) => ({
                         ...emotion,
-                        timestamp: new Date(emotion.timestamp)
+                        // timestamp: new Date(emotion.timestamp)
                     }));
                 } catch (error) {
                     console.error('Помилка завантаження емоцій:', error);
@@ -60,5 +65,4 @@ class EmotionStore {
     };
 }
 
-// Створюємо единий екземпляр store
 export const emotionStore = new EmotionStore();

@@ -8,7 +8,7 @@ export const StatsModal = observer(() => {
     return (
         <Dialog>
             <DialogTrigger asChild >
-                <Button variant="outline" disabled={emotionStore.emotions.length === 0}>
+                <Button variant="outline" disabled={emotionStore.emotions.length === 0} suppressHydrationWarning>
                     <ChartColumn />
                     Статистика
                 </Button >

@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react";
 import { observer } from "mobx-react-lite";
 import { EmotionCard } from "./EmotionCard";
 import { motion, Reorder } from "framer-motion";
+import { Emotion } from "@/types/emotions";
 
 export const EmotionsList = observer(() => {
     const [isHydrated, setIsHydrated] = useState(false);
@@ -24,9 +25,9 @@ export const EmotionsList = observer(() => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    const handleReorder = (newOrder: any[]) => {
+    const handleReorder = (newOrder: Emotion[]) => {
         const currentEmotions = emotionStore.emotions;
-        const newEmotions: any[] = [];
+        const newEmotions: Emotion[] = [];
 
         newOrder.forEach(item => {
             const emotion = currentEmotions.find(e => e.id === item.id);
@@ -60,7 +61,7 @@ export const EmotionsList = observer(() => {
                     onReorder={handleReorder}
                     className="flex flex-col gap-4"
                 >
-                    {emotionStore.emotions.map((item, index) => (
+                    {emotionStore.emotions.map((item) => (
                         <Reorder.Item
                             key={item.id}
                             value={item}

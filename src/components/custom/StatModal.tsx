@@ -1,4 +1,4 @@
-import { ChartColumn, Heart } from "lucide-react"
+import { ChartColumn } from "lucide-react"
 import { Button } from "../ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { observer } from "mobx-react-lite"
@@ -6,14 +6,11 @@ import { emotionStore } from "@/stores/emotionSore";
 import { motion } from "framer-motion";
 import { EmotionType } from "@/types/emotions";
 import { emotionsData } from "@/lib/emotions";
-import { TrendingUp } from "lucide-react"
 import { Pie, PieChart } from "recharts"
 
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -79,9 +76,9 @@ export const StatsModal = observer(() => {
                         <div className="p-4">
                             <div className="flex items-center gap-3">
                                 <div>
-                                    <p className="text-sm text-gray-600">Настрій</p>
+                                    <p className="text-sm text-gray-400">Настрій</p>
                                     <div className="flex items-center gap-2">
-                                        <span className="text-2xl font-bold text-gray-900">
+                                        <span className="text-2xl font-bold text-gray-500">
                                             {getMoodScore() > 0 ? '+' : ''}{getMoodScore()}%
                                         </span>
                                         <span className={`text-sm px-2 py-1 rounded-full ${getMoodScore() > 20 ? 'bg-green-100 text-green-800' :
@@ -103,8 +100,8 @@ export const StatsModal = observer(() => {
                                         {emotionsData[result.type].icon}
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-600">Найчастіша емоція</p>
-                                        <p className="text-lg font-bold text-gray-900">
+                                        <p className="text-sm text-gray-400">Найчастіша емоція</p>
+                                        <p className="text-lg font-bold text-gray-500">
                                             {emotionsData[result.type].name}
                                         </p>
                                         <p className="text-sm text-gray-500">
@@ -115,53 +112,54 @@ export const StatsModal = observer(() => {
                             </div>
                         )}
                     </div>
-                    <ChartPieSeparatorNone />
+                    <ChartPieSeparatorNone emotionCounts={emotionCounts} />
                 </motion.div>
             </DialogContent>
         </Dialog>
     )
 });
 
-const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
-
 const chartConfig = {
-    visitors: {
-        label: "Visitors",
+    count: {
+        label: "Кількість",
     },
-    chrome: {
-        label: "Chrome",
+    joy: {
+        label: "Радість",
         color: "var(--chart-1)",
     },
-    safari: {
-        label: "Safari",
+    sadness: {
+        label: "Смуток",
         color: "var(--chart-2)",
     },
-    firefox: {
-        label: "Firefox",
+    anger: {
+        label: "Злість",
         color: "var(--chart-3)",
     },
-    edge: {
-        label: "Edge",
+    surprise: {
+        label: "Подив",
         color: "var(--chart-4)",
     },
-    other: {
-        label: "Other",
+    love: {
+        label: "Любов",
         color: "var(--chart-5)",
     },
+    fear: {
+        label: "Страх",
+        color: "var(--chart-6)",
+    }
 } satisfies ChartConfig
 
-export function ChartPieSeparatorNone() {
+export function ChartPieSeparatorNone({ emotionCounts }: { emotionCounts: Record<EmotionType, number> }) {
+    const chartData = Object.entries(emotionCounts).map(([emotion, count]) => ({
+        emotion,
+        count,
+        fill: `var(--color-${emotion})`
+    }));
+
     return (
         <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">
-                <CardTitle>Pie Chart - Separator None</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Статистика емоцій</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
@@ -175,21 +173,13 @@ export function ChartPieSeparatorNone() {
                         />
                         <Pie
                             data={chartData}
-                            dataKey="visitors"
-                            nameKey="browser"
+                            dataKey="count"
+                            nameKey="emotion"
                             stroke="0"
                         />
                     </PieChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
-                <div className="flex items-center gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
         </Card>
     )
 }

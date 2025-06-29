@@ -1,4 +1,4 @@
-import { EmotionData, EmotionsData } from "@/types/emotions";
+import { EmotionsData } from "@/types/emotions";
 
 export const emotionsData: EmotionsData = {
     joy: {

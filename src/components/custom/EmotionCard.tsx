@@ -77,11 +77,11 @@ export const EmotionCard = observer(({ type, comment, id, isDragging = false }: 
                 }}
                 className="relative"
             >
-                <Card className={cn("shadow-lg p-4 min-h-[150px] flex flex-row w-full justify-between items-start transition-all duration-200", emotionInfo.activeStyles, isDragging && "shadow-2xl")}>
+                <Card className={cn("shadow-lg p-4 min-h-[150px] flex flex-row w-full justify-between items-start transition-all duration-200", emotionInfo?.activeStyles, isDragging && "shadow-2xl")}>
                     <div className="flex items-start gap-4">
-                        <p className="text-4xl">{emotionInfo.icon}</p>
+                        <p className="text-4xl">{emotionInfo?.icon}</p>
                         <div className="flex flex-col gap-2">
-                            <p className="font-semibold">{emotionInfo.name}</p>
+                            <p className="font-semibold text-black">{emotionInfo?.name}</p>
                             <p className="text-sm text-gray-500">{comment}</p>
                         </div>
                     </div>

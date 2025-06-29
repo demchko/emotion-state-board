@@ -4,11 +4,18 @@ import { makeAutoObservable } from 'mobx';
 class EmotionStore {
     emotions: Emotion[] = [];
     isModalOpen: boolean = false;
+    private isHydrated: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
-        this.loadFromStorage();
     }
+
+    hydrate = () => {
+        if (!this.isHydrated && typeof window !== 'undefined') {
+            this.loadFromStorage();
+            this.isHydrated = true;
+        }
+    };
 
     addEmotion = (type: EmotionType, comment: string) => {
         const newEmotion: Emotion = {
@@ -25,6 +32,10 @@ class EmotionStore {
         this.emotions = this.emotions.filter(emotion => emotion.id !== id);
         this.saveToStorage();
     };
+
+    get isReady() {
+        return this.isHydrated;
+    }
 
     reorderEmotions = (startIndex: number, endIndex: number) => {
         const result = Array.from(this.emotions);

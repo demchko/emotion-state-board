@@ -36,11 +36,11 @@ export const emotionsData: EmotionsData = {
         activeStyles: 'bg-gray-200 border-gray-300',
         name: 'Страх'
     },
-    disgust: {
-        icon: '🤮',
-        color: 'bg-green-600',
-        borderColor: 'border-green-600',
-        activeStyles: 'bg-green-200 border-green-300',
-        name: 'Огида'
+    love: {
+        icon: '😍',
+        color: 'bg-pink-600',
+        borderColor: 'border-pink-600',
+        activeStyles: 'bg-pink-200 border-pink-300',
+        name: 'Любов'
     },
 };

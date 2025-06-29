@@ -48,7 +48,7 @@ export const EmotionsList = observer(() => {
         </div>;
     }
 
-    console.log(isMobile)
+    // console.log(isMobile)
 
 
     if (isMobile) {

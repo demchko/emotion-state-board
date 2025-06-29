@@ -1,4 +1,4 @@
-export type EmotionType = 'joy' | 'sadness' | 'anger' | 'fear' | 'disgust' | 'surprise';
+export type EmotionType = 'joy' | 'sadness' | 'anger' | 'fear' | 'love' | 'surprise';
 
 export interface Emotion {
     id: string;

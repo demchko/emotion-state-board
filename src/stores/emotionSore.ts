@@ -63,7 +63,7 @@ class EmotionStore {
             if (stored) {
                 try {
                     const parsedEmotions = JSON.parse(stored);
-                    this.emotions = parsedEmotions.map((emotion: any) => ({
+                    this.emotions = parsedEmotions.map((emotion: Emotion) => ({
                         ...emotion,
                         // timestamp: new Date(emotion.timestamp)
                     }));

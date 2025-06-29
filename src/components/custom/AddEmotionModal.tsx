@@ -67,13 +67,13 @@ export const AddEmotionModal = () => {
                     {selectedEmotion && (
                         <motion.div
                             initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
+                            animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
                             className="min-h-0"
                         >
                             <Label className="text-sm font-semibold mb-1 block">
-                                Коментар (необов'язково)
+                                Коментар (необов&apos;язково)
                             </Label>
                             <Textarea
                                 placeholder="Розкажіть більше про вашу емоцію..."
@@ -99,4 +99,4 @@ export const AddEmotionModal = () => {
             </DialogContent>
         </Dialog>
     )
-}  
+}

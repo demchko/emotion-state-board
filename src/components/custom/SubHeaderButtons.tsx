@@ -22,7 +22,7 @@ export const SubHeaderButtons = observer(() => {
             className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-4 items-center justify-between"
         >
             <Image src="https://cdn-icons-png.flaticon.com/512/6911/6911451.png" alt="Logo" width={100} height={100} />
-            <div className="flex flex-col sm:flex-row gap-4" >
+            <div className="flex flex-col sm:flex-row gap-4 text-center justify-center items-center" >
                 <AddEmotionModal />
                 {
                     emotionStore.isReady && (
